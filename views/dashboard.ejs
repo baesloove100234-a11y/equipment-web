@@ -1,0 +1,57 @@
+<div class="page-head">
+  <div>
+    <h2>รายการวัตถุมงคล</h2>
+    <p>ค้นหาและเบิกวัตถุมงคลจากระบบ</p>
+  </div>
+</div>
+
+<form class="search-box" method="GET" action="/dashboard">
+  <input type="text" name="q" placeholder="ค้นหาจากชื่อ รหัส หรือหมวดหมู่" value="<%= keyword %>">
+  <button type="submit">ค้นหา</button>
+</form>
+
+<div class="grid">
+  <% if (items.length === 0) { %>
+    <div class="empty">ไม่พบข้อมูลวัตถุมงคล</div>
+  <% } %>
+
+  <% items.forEach(item => { %>
+    <div class="card">
+      <a class="image-link" href="/items/<%= item.id %>">
+  <div class="image-wrap">
+    <% if (item.image) { %>
+      <img src="/uploads/<%= item.image %>" alt="<%= item.name %>">
+    <% } else { %>
+      <div class="no-image">ไม่มีรูปภาพ</div>
+    <% } %>
+  </div>
+</a>
+
+      <div class="card-body">
+        <div class="code"><%= item.code %></div>
+        <h3>
+  <a class="item-title-link" href="/items/<%= item.id %>">
+    <%= item.name %>
+  </a>
+</h3>
+
+        <p>หมวดหมู่: <%= item.category || '-' %></p>
+        <p>สถานที่เก็บ: <%= item.location || '-' %></p>
+
+        <div class="qty">
+          คงเหลือ:
+          <strong><%= item.qty %></strong>
+          <%= item.unit || 'ชิ้น' %>
+        </div>
+
+        <a class="btn secondary" href="/items/<%= item.id %>">ดูรายละเอียด</a>
+
+        <% if (item.qty > 0) { %>
+          <a class="btn" href="/withdraw/<%= item.id %>">เบิกวัตถุมงคล</a>
+        <% } else { %>
+          <button class="btn disabled" disabled>ของหมด</button>
+        <% } %>
+      </div>
+    </div>
+  <% }) %>
+</div>

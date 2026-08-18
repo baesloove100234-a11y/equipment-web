@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title><%= title %> | วัตถุมงคล</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">MED</span>
+      <div>
+        <h1>วัตถุมงคล</h1>
+        <small>Thai Buddha Amulets</small>
+      </div>
+    </div>
+
+    <% if (user) { %>
+      <nav>
+        <a href="/dashboard">หน้าหลัก</a>
+        <a href="/history">ประวัติ</a>
+        <a href="/change-password">เปลี่ยนรหัสผ่าน</a>
+
+        <% if (user.role === 'admin') { %>
+          <a href="/admin/items">ระบบบริหารจัดการ</a>
+        <% } %>
+
+        <span class="user-badge">
+          <%= user.name %> | <%= user.role %>
+        </span>
+
+        <a href="/logout" class="logout">ออกจากระบบ</a>
+      </nav>
+    <% } %>
+  </header>
+
+  <main class="container">
+    <%- body %>
+  </main>
+
+</body>
+</html>

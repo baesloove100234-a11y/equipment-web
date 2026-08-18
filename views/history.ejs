@@ -1,0 +1,44 @@
+<div class="page-head">
+  <div>
+    <h2>ประวัติการรับเข้า/เบิกออก</h2>
+    <p>ตรวจสอบรายการเคลื่อนไหวของวัตถุมงคล</p>
+  </div>
+</div>
+
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>วันที่</th>
+        <th>ประเภท</th>
+        <th>รหัส</th>
+        <th>รายการ</th>
+        <th>จำนวน</th>
+        <th>ผู้ทำรายการ</th>
+        <th>หมายเหตุ</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% rows.forEach(row => { %>
+        <tr>
+          <td><%= row.created_at %></td>
+
+          <td>
+            <% if (row.type === 'RECEIVE') { %>
+              <span class="status receive">รับเข้า</span>
+            <% } else { %>
+              <span class="status issue">เบิกออก</span>
+            <% } %>
+          </td>
+
+          <td><%= row.code %></td>
+          <td><%= row.item_name %></td>
+          <td><%= row.qty %></td>
+          <td><%= row.user_name %></td>
+          <td><%= row.note || '-' %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

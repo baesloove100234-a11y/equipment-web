@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run Equipment Web",
+      "program": "${workspaceFolder}/server.js",
+      "console": "integratedTerminal"
+    }
+  ]
+}

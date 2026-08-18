@@ -1,0 +1,30 @@
+<div class="form-card">
+  <h2>เบิกวัตถุมงคล</h2>
+
+  <% if (error) { %>
+    <div class="alert"><%= error %></div>
+  <% } %>
+
+  <div class="withdraw-box">
+    <% if (item.image) { %>
+      <img src="/uploads/<%= item.image %>">
+    <% } %>
+
+    <div>
+      <h3><%= item.name %></h3>
+      <p>รหัส: <%= item.code %></p>
+      <p>คงเหลือ: <b><%= item.qty %></b> <%= item.unit || 'ชิ้น' %></p>
+    </div>
+  </div>
+
+  <form method="POST" action="/withdraw/<%= item.id %>">
+    <label>จำนวนที่ต้องการเบิก</label>
+    <input type="number" name="qty" min="1" max="<%= item.qty %>" required>
+
+    <label>หมายเหตุ</label>
+    <textarea name="note" rows="3" placeholder="เช่น ใช้ในห้องเรียน / ใช้ในโครงการ"></textarea>
+
+    <button type="submit">ยืนยันการเบิก</button>
+    <a href="/dashboard" class="btn secondary">ย้อนกลับ</a>
+  </form>
+</div>

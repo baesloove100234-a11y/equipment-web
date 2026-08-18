@@ -1,0 +1,44 @@
+<div class="form-card">
+  <h2><%= title %></h2>
+
+  <form method="POST" action="<%= action %>" enctype="multipart/form-data">
+    <label>รหัสวัตถุมงคล</label>
+    <input type="text" name="code" value="<%= item ? item.code : '' %>" required>
+
+    <label>ชื่อวัตถุมงคล</label>
+    <input type="text" name="name" value="<%= item ? item.name : '' %>" required>
+
+    <label>หมวดหมู่</label>
+    <input type="text" name="category" value="<%= item ? item.category : '' %>">
+
+    <label>หน่วยนับ</label>
+    <input type="text" name="unit" value="<%= item ? item.unit : '' %>" placeholder="เช่น ชิ้น, เครื่อง, ชุด">
+
+    <label>สถานที่เก็บ</label>
+    <input type="text" name="location" value="<%= item ? item.location : '' %>">
+
+    <label>ประวัติความเป็นมา / คำอธิบาย</label>
+<textarea 
+  name="description" 
+  rows="8" 
+  placeholder="ใส่ประวัติความเป็นมา รายละเอียด รุ่น ปีที่สร้าง ที่มา หรือข้อมูลเพิ่มเติม"
+><%= item ? (item.description || '') : '' %></textarea>
+
+    <% if (!item) { %>
+      <label>จำนวนเริ่มต้น</label>
+      <input type="number" name="qty" min="0" value="0">
+    <% } %>
+
+    <label>รูปภาพ</label>
+    <input type="file" name="image" accept="image/*">
+
+    <% if (item && item.image) { %>
+      <div class="preview">
+        <img src="/uploads/<%= item.image %>">
+      </div>
+    <% } %>
+
+    <button type="submit">บันทึกข้อมูล</button>
+    <a class="btn secondary" href="/admin/items">ย้อนกลับ</a>
+  </form>
+</div>

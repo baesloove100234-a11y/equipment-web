@@ -1,0 +1,62 @@
+<div class="page-head">
+  <div>
+    <h2>บริหารจัดการวัตถุมงคล</h2>
+    <p>เพิ่ม แก้ไข และรับเข้าวัตถุมงคล</p>
+  </div>
+
+  <a class="btn gold" href="/admin/items/new">+ เพิ่มวัตถุมงคล</a>
+</div>
+
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>รูป</th>
+        <th>รหัส</th>
+        <th>ชื่อวัตถุมงคล</th>
+        <th>หมวดหมู่</th>
+        <th>คงเหลือ</th>
+        <th>รับเข้า</th>
+        <th>จัดการ</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% items.forEach(item => { %>
+        <tr>
+          <td>
+            <% if (item.image) { %>
+              <img class="thumb" src="/uploads/<%= item.image %>">
+            <% } else { %>
+              -
+            <% } %>
+          </td>
+
+          <td><%= item.code %></td>
+          <td><%= item.name %></td>
+          <td><%= item.category || '-' %></td>
+          <td>
+            <b><%= item.qty %></b>
+            <%= item.unit || 'ชิ้น' %>
+          </td>
+
+          <td>
+            <form class="inline-form" method="POST" action="/admin/items/<%= item.id %>/add-stock">
+              <input type="number" name="qty" min="1" placeholder="จำนวน" required>
+              <input type="text" name="note" placeholder="หมายเหตุ">
+              <button type="submit">รับเข้า</button>
+            </form>
+          </td>
+
+          <td>
+            <a class="small-btn" href="/admin/items/<%= item.id %>/edit">แก้ไข</a>
+
+            <form class="delete-form" method="POST" action="/admin/items/<%= item.id %>/delete" onsubmit="return confirm('ยืนยันการลบรายการนี้?')">
+              <button type="submit" class="danger">ลบ</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

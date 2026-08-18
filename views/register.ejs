@@ -1,0 +1,25 @@
+<div class="auth-card">
+  <h2>สมัครสมาชิก</h2>
+
+  <% if (error) { %>
+    <div class="alert"><%= error %></div>
+  <% } %>
+
+  <form method="POST" action="/register">
+    <label>ชื่อ-นามสกุล</label>
+    <input type="text" name="name" required>
+
+    <label>ชื่อผู้ใช้</label>
+    <input type="text" name="username" required>
+
+    <label>รหัสผ่าน</label>
+    <input type="password" name="password" required>
+
+    <button type="submit">สมัครสมาชิก</button>
+  </form>
+
+  <p class="text-center">
+    มีบัญชีแล้ว?
+    <a href="/login">เข้าสู่ระบบ</a>
+  </p>
+</div>
