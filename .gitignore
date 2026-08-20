@@ -21,3 +21,6 @@ equipment.db
 # Uploaded images
 public/uploads/*
 !public/uploads/.gitkeep
+# Local startup scripts
+start-equipment.bat
+startup-equipment.cmd

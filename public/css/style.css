@@ -906,3 +906,157 @@ body.modal-open {
   font-size: 16px;
   white-space: pre-line;
 }
+
+.withdraw-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.withdraw-modal.show {
+  display: flex;
+}
+
+.withdraw-modal-box {
+  width: 100%;
+  max-width: 520px;
+  background: white;
+  border-radius: 24px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  animation: popupScale 0.2s ease;
+}
+
+@keyframes popupScale {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.withdraw-modal-close {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #ef4444;
+  color: white;
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding-bottom: 5px;
+}
+
+.withdraw-modal-close:hover {
+  background: #b91c1c;
+}
+
+.withdraw-modal-box h2 {
+  margin: 0 0 18px;
+  color: var(--blue);
+  font-size: 28px;
+}
+
+.withdraw-item-info {
+  background: linear-gradient(135deg, #ecfdf5, #eff6ff);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border-left: 6px solid var(--gold);
+}
+
+.withdraw-code {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--blue);
+  font-weight: 900;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.withdraw-item-info h3 {
+  margin: 6px 0 10px;
+  color: var(--blue);
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.withdraw-item-info p {
+  margin: 0;
+  color: #374151;
+}
+
+.withdraw-item-info strong {
+  color: #0f9d58;
+  font-size: 26px;
+}
+
+.withdraw-modal-box label {
+  display: block;
+  margin: 14px 0 7px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.withdraw-modal-box input,
+.withdraw-modal-box textarea {
+  width: 100%;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 16px;
+  outline: none;
+}
+
+.withdraw-modal-box input:focus,
+.withdraw-modal-box textarea:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+}
+
+.withdraw-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .withdraw-modal-box {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .withdraw-modal-box h2 {
+    font-size: 24px;
+  }
+
+  .withdraw-modal-actions {
+    flex-direction: column;
+  }
+
+  .withdraw-modal-actions .btn {
+    width: 100%;
+  }
+}

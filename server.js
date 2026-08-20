@@ -237,41 +237,37 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/register", (req, res) => {
-  res.render("register", { title: "สมัครสมาชิก", error: null });
-});
-
-app.post("/register", async (req, res) => {
-  try {
-    const { name, username, password } = req.body;
-
-    if (!name || !username || !password) {
-      return res.render("register", {
-        title: "สมัครสมาชิก",
-        error: "กรุณากรอกข้อมูลให้ครบ"
-      });
+// ==========================
+// Logout
+// ==========================
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("ออกจากระบบไม่สำเร็จ");
     }
 
-    const hash = await bcrypt.hash(password, 10);
-
-    await run(
-      "INSERT INTO users (name, username, password_hash, role) VALUES (?, ?, ?, ?)",
-      [name, username, hash, "member"]
-    );
-
-    res.redirect("/login");
-  } catch (err) {
-    res.render("register", {
-      title: "สมัครสมาชิก",
-      error: "ชื่อผู้ใช้นี้มีอยู่แล้ว หรือเกิดข้อผิดพลาด"
-    });
-  }
-});
-
-app.get("/logout", (req, res) => {
-  req.session.destroy(() => {
+    res.clearCookie("connect.sid");
     res.redirect("/login");
   });
+});
+
+// ==========================
+// ปิดการสมัครสมาชิกใหม่
+// ==========================
+app.get("/register", (req, res) => {
+  res.status(403).send(`
+    <h2>ปิดการสมัครสมาชิก</h2>
+    <p>ระบบไม่เปิดให้สมัครสมาชิกใหม่ กรุณาติดต่อผู้ดูแลระบบ</p>
+    <a href="/login">กลับไปหน้าเข้าสู่ระบบ</a>
+  `);
+});
+
+app.post("/register", (req, res) => {
+  res.status(403).send(`
+    <h2>ปิดการสมัครสมาชิก</h2>
+    <p>ระบบไม่เปิดให้สมัครสมาชิกใหม่ กรุณาติดต่อผู้ดูแลระบบ</p>
+    <a href="/login">กลับไปหน้าเข้าสู่ระบบ</a>
+  `);
 });
 
 
